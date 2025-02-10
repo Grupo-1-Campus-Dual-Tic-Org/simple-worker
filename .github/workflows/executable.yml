@@ -1,0 +1,34 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.17'  
+
+      - name: Install Dependencies (if any)
+        run: |
+          # Instala dependencias si tu proyecto las tiene
+          # Ejemplo: apt-get update && apt-get install -y ...
+
+      - name: Build Executables
+        run: |
+          chmod +x build.sh  # Dar permisos de ejecución
+          ./app-bluengo-worker/build.sh
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: bluengo-worker-executables
+          path: dist  # Directorio donde se guardaron los ejecutables
