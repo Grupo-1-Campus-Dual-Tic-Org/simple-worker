@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -15,7 +15,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
-          go-version: '1.17'  
+          go-version: '1.17'  # Consider using a more recent Go version
 
       - name: Install Dependencies (if any)
         run: |
@@ -24,11 +24,11 @@ jobs:
 
       - name: Build Executables
         run: |
-          chmod +x build.sh  # Dar permisos de ejecución
-          ./app-bluengo-worker/build.sh
+          chmod +x app-bluengo-worker/build.sh  # Dar permisos de ejecución al script en su directorio
+          ./app-bluengo-worker/build.sh  # Ejecutar el script desde su directorio
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4 # Usando la versión más reciente
         with:
           name: bluengo-worker-executables
-          path: dist  # Directorio donde se guardaron los ejecutables
+          path: app-bluengo-worker/dist  # Directorio donde se guardaron los ejecutables
