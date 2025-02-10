@@ -15,7 +15,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
-          go-version: '1.17'  # Consider using a more recent Go version
+          go-version: '1.21'  # Cambiar para que coincida con go.mod
 
       - name: Install Dependencies (if any)
         run: |
@@ -24,11 +24,11 @@ jobs:
 
       - name: Build Executables
         run: |
-          chmod +x app-bluengo-worker/build.sh  # Dar permisos de ejecución al script en su directorio
-          ./app-bluengo-worker/build.sh  # Ejecutar el script desde su directorio
+          chmod +x app-bluengo-worker/build.sh  # Dar permisos de ejecución al script
+          ./app-bluengo-worker/build.sh  # Ejecutar el script
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4 # Usando la versión más reciente
+        uses: actions/upload-artifact@v4
         with:
           name: bluengo-worker-executables
           path: app-bluengo-worker/dist  # Directorio donde se guardaron los ejecutables
